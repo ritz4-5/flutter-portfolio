@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ListView buildListView() {
-    final List<Widget> list = <Widget>[TestPage()];
+    final List<Widget> list = <Widget>[AirbnbDiscover()];
 
     return ListView.separated(
       padding: const EdgeInsets.all(8.0),
@@ -79,24 +79,14 @@ class _MyHomePageState extends State<MyHomePage> {
         return Container(
           height: 50,
           child: ListTile(
-            leading: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => list[index]),
-                );
-              },
-              child: Container(
-                width: 48,
-                height: 48,
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                alignment: Alignment.center,
-                child: CircleAvatar(),
-              ),
-            ),
             title: Text(list[index].toString()),
             dense: false,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => list[index]),
+              );
+            },
           ),
         );
       },

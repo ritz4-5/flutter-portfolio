@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 
-class TestPage extends StatefulWidget {
-  TestPage({Key key, this.title}) : super(key: key);
+class AirbnbDiscover extends StatefulWidget {
+  AirbnbDiscover({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -16,10 +16,10 @@ class TestPage extends StatefulWidget {
   final String title;
 
   @override
-  _TestPageState createState() => _TestPageState();
+  _AirbnbDiscoverState createState() => _AirbnbDiscoverState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _AirbnbDiscoverState extends State<AirbnbDiscover> {
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -34,41 +34,45 @@ class _TestPageState extends State<TestPage> {
           // the App.build method, and use it to set our appbar title.
           //title: Text(widget.title),
           ),
+      body: buildListView(),
     );
   }
 
   ListView buildListView() {
-    final List<Widget> list = <Widget>[TestPage()];
-
-    return ListView.separated(
-      padding: const EdgeInsets.all(8.0),
-      itemCount: list.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
-          height: 50,
-          child: ListTile(
-            leading: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => list[index]),
-                );
-              },
-              child: Container(
-                width: 48,
-                height: 48,
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                alignment: Alignment.center,
-                child: CircleAvatar(),
-              ),
-            ),
-            title: Text(list[index].toString()),
-            dense: false,
+    return ListView(
+      children: <Widget>[
+        Stack(
+          alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Container(
+            child: Image.network('https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg'),
           ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text("San Juan",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                  )
+              ),
+
+              SizedBox(height: 20),
+              Text("This weekend",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16
+                  )
+              )
+            ],
+          )
+
+        ]),
+        Container(
+          child: Image.network('https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg'),
+        ),
+      ],
+
     );
   }
 }
