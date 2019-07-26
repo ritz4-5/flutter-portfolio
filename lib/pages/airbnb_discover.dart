@@ -47,12 +47,14 @@ class _AirbnbDiscoverState extends State<AirbnbDiscover> {
           Container(
             child: Image.network('https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg'),
           ),
+          Positioned.fill(child: Container(color: Colors.grey.withOpacity(0.2))),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text("San Juan",
                   style: TextStyle(
                       color: Colors.white,
+                      fontWeight: FontWeight.w700,
                       fontSize: 40,
                   )
               ),
@@ -65,8 +67,7 @@ class _AirbnbDiscoverState extends State<AirbnbDiscover> {
                   )
               )
             ],
-          )
-
+          ),
         ]),
         Container(
           child: Image.network('https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg'),
