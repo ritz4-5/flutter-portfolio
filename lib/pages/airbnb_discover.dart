@@ -23,8 +23,10 @@ class AirbnbDiscover extends StatefulWidget {
 
 class _AirbnbDiscoverState extends State<AirbnbDiscover> {
   List<Item> items = [
-    Item("San Juan", "This weekend", "https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg"),
-    Item("東京", "Next weekend", "https://img.hldy-cdn.com/images/holiday_article_images/w=660,h=371,c=true/866.jpg?1546937545"),
+    Item("San Juan", "This weekend",
+        "https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg"),
+    Item("東京", "Next weekend",
+        "https://img.hldy-cdn.com/images/holiday_article_images/w=660,h=371,c=true/866.jpg?1546937545"),
   ];
 
   @override
@@ -47,43 +49,34 @@ class _AirbnbDiscoverState extends State<AirbnbDiscover> {
 
   Widget buildListView() {
     return ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return buildListCell(items[index]);
-        },
-        itemCount: items.length,
+      itemBuilder: (BuildContext context, int index) {
+        return buildListCell(items[index]);
+      },
+      itemCount: items.length,
     );
   }
 
   Widget buildListCell(Item item) {
-    return Stack(
-        alignment: AlignmentDirectional.center,
+    return Stack(alignment: AlignmentDirectional.center, children: <Widget>[
+      Container(
+        child: Image.network(item.imageUrl),
+      ),
+      Positioned.fill(child: Container(color: Colors.grey.withOpacity(0.2))),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
-            child: Image.network(item.imageUrl),
-          ),
-          Positioned.fill(child: Container(color: Colors.grey.withOpacity(0.2))),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(item.title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 40,
-                  )
-              ),
-
-              SizedBox(height: 20),
-              Text(item.subTitle,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16
-                  )
-              )
-            ],
-          ),
-        ]
-    );
+          Text(item.title,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 40,
+              )),
+          SizedBox(height: 20),
+          Text(item.subTitle,
+              style: TextStyle(color: Colors.white, fontSize: 16))
+        ],
+      ),
+    ]);
   }
 }
 
@@ -93,5 +86,4 @@ class Item {
   String imageUrl;
 
   Item(this.title, this.subTitle, this.imageUrl);
-
 }
