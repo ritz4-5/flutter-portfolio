@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 
+// theme/airbnb.png
+
 class AirbnbDiscover extends StatefulWidget {
   AirbnbDiscover({Key key, this.title}) : super(key: key);
 
@@ -20,6 +22,11 @@ class AirbnbDiscover extends StatefulWidget {
 }
 
 class _AirbnbDiscoverState extends State<AirbnbDiscover> {
+  List<Item> items = [
+    Item("San Juan", "This weekend", "https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg"),
+    Item("東京", "Next weekend", "https://img.hldy-cdn.com/images/holiday_article_images/w=660,h=371,c=true/866.jpg?1546937545"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -38,42 +45,53 @@ class _AirbnbDiscoverState extends State<AirbnbDiscover> {
     );
   }
 
-  ListView buildListView() {
-    return ListView(
-      children: <Widget>[
-        Stack(
-          alignment: AlignmentDirectional.center,
+  Widget buildListView() {
+    return ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return buildListCell(items[index]);
+        },
+        itemCount: items.length,
+    );
+  }
+
+  Widget buildListCell(Item item) {
+    return Stack(
+        alignment: AlignmentDirectional.center,
         children: <Widget>[
           Container(
-            child: Image.network('https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg'),
+            child: Image.network(item.imageUrl),
           ),
           Positioned.fill(child: Container(color: Colors.grey.withOpacity(0.2))),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text("San Juan",
+              Text(item.title,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 40,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 40,
                   )
               ),
 
               SizedBox(height: 20),
-              Text("This weekend",
+              Text(item.subTitle,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16
+                      color: Colors.white,
+                      fontSize: 16
                   )
               )
             ],
           ),
-        ]),
-        Container(
-          child: Image.network('https://img-cdn.guide.travel.co.jp/article/208/33783/A0DBEE03A1004A579A38CCD2115A8ECC_LL.jpg'),
-        ),
-      ],
-
+        ]
     );
   }
+}
+
+class Item {
+  String title;
+  String subTitle;
+  String imageUrl;
+
+  Item(this.title, this.subTitle, this.imageUrl);
+
 }
