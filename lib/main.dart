@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_portfolio/pages/airbnb_discover.dart';
+import 'package:flutter_portfolio/pages/primevideo.dart';
 
 void main() {
   // Enable integration testing with the Flutter Driver extension.
@@ -51,6 +52,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // ページを追加したらここにも追加する
+  final List<Widget> list = <Widget>[AirbnbDiscover(), PrimeVideo()];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -70,8 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ListView buildListView() {
-    final List<Widget> list = <Widget>[AirbnbDiscover()];
-
     return ListView.separated(
       padding: const EdgeInsets.all(8.0),
       itemCount: list.length,
